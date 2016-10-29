@@ -14,6 +14,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		/*https://www.websequencediagrams.com/?lz=dGl0bGUgUGl6emVyaWEKCmludGVyZmFjY2lhLT5MaXN0YTpBcHJlIGxpc3RhABAOUGl6emFpb2xvOlRocmVhZCBwAAkIADgOKwBBBgAZBUluAE8FKCkKbm90ZSBsZWZ0IG9mIABjBgBICSBpbiBhdHRlc2EKAH4FLQCBAwggbm90aWZ5QWxsKCkAFAcAfAtyZXR1cm4AgQEGCgCBFQktAIEeDABQBiBwcmVwYXJhABoRAIEfDSBwcm9udGEoAIFSBQBnCACCDQgAdhMtAHoQCgCCQA91dGVudGU6YXJyaXZvIGNsaWVudGUsdACCNwYAFwYAggkOAIMCCzpwcmVtbyBzdQAJDAoKAE0GAIMiCG9yZGluZQCDEwUAgS4IAIJiBXJpZ2gAgl0LIHZlZGUgc2UgYyfDqCB1bgCCAQcsAIJeFQCBVRQAgUIHAIFfBw&s=napkin*/
+		
 		Display display = Display.getDefault();
 		Shell shell = new Shell();
 		shell.setSize(450, 400);
@@ -40,6 +41,7 @@ public class Main {
 		Label lblSecondoPizzaiolo = new Label(shell, SWT.NONE);
 		lblSecondoPizzaiolo.setBounds(289, 214, 96, 15);
 		lblSecondoPizzaiolo.setText("Secondo Pizzaiolo");
+		
 		
 		List list = new List(shell, SWT.BORDER);
 		list.setBounds(10, 95, 90, 80);
