@@ -1,6 +1,9 @@
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Button;
+
+import java.util.ArrayList;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Label;
@@ -14,15 +17,31 @@ public class Main {
 	 * Launch the application.
 	 * @param args
 	 */
+	
 	public static void main(String[] args) {
+		
 		/*https://www.websequencediagrams.com/?lz=dGl0bGUgUGl6emVyaWEKCmludGVyZmFjY2lhLT5MaXN0YTpBcHJlIGxpc3RhABAOUGl6emFpb2xvOlRocmVhZCBwAAkIADgOKwBBBgAZBUluAE8FKCkKbm90ZSBsZWZ0IG9mIABjBgBICSBpbiBhdHRlc2EKAH4FLQCBAwggbm90aWZ5QWxsKCkAFAcAfAtyZXR1cm4AgQEGCgCBFQktAIEeDABQBiBwcmVwYXJhABoRAIEfDSBwcm9udGEoAIFSBQBnCACCDQgAdhMtAHoQCgCCQA91dGVudGU6YXJyaXZvIGNsaWVudGUsdACCNwYAFwYAggkOAIMCCzpwcmVtbyBzdQAJDAoKAE0GAIMiCG9yZGluZQCDEwUAgS4IAIJiBXJpZ2gAgl0LIHZlZGUgc2UgYyfDqCB1bgCCAQcsAIJeFQCBVRQAgUIHAIFfBw&s=napkin*/
 		
 		Display display = Display.getDefault();
 		Shell shell = new Shell();
 		shell.setSize(450, 400);
-		shell.setText("SWT Application");
+		shell.setText("Pizzzzeria Mammma mia");
 		
 		Button btnApriPizzeria = new Button(shell, SWT.NONE);
+		btnApriPizzeria.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				Lista lista = new Lista();
+				
+				Pizzaiolo1 p1= new Pizzaiolo1();
+				Thread thp1 = new Thread(p1);
+				Pizzaiolo2 p2= new Pizzaiolo2();
+				Thread thp2 = new Thread(p2);
+				
+				thp1.start();
+				thp2.start();
+			}
+		});
 
 		btnApriPizzeria.setBounds(96, 10, 75, 25);
 		btnApriPizzeria.setText("Apri Pizzeria");
@@ -32,6 +51,8 @@ public class Main {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				//aprire interfaccia cliente
+				interfacciaCliente iu = new interfacciaCliente();
+				iu.open();
 			}
 		});
 		btnArrivaCliente.setBounds(266, 10, 75, 25);

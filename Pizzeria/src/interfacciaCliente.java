@@ -1,6 +1,9 @@
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+
+import javax.swing.JFrame;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.wb.swt.SWTResourceManager;
@@ -9,7 +12,9 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 
-public class interfacciaCliente {
+public class interfacciaCliente extends JFrame {
+	public interfacciaCliente() {
+	}
 	private Text text;
 	private Text text_1;
 	private String pizza,nome;
@@ -68,6 +73,7 @@ public class interfacciaCliente {
 			public void widgetSelected(SelectionEvent e) {
 				nome = text.getText();
 				pizza = text_1.getText();
+				display.close();
 			}
 		});
 		btnConferma.setBounds(73, 227, 89, 25);
