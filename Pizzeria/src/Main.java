@@ -5,6 +5,8 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.List;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 
 public class Main {
 
@@ -25,6 +27,12 @@ public class Main {
 		btnApriPizzeria.setText("Apri Pizzeria");
 		
 		Button btnArrivaCliente = new Button(shell, SWT.NONE);
+		btnArrivaCliente.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				//aprire interfaccia cliente
+			}
+		});
 		btnArrivaCliente.setBounds(266, 10, 75, 25);
 		btnArrivaCliente.setText("Arriva Cliente");
 		
