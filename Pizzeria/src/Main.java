@@ -23,6 +23,7 @@ public class Main {
 		shell.setText("SWT Application");
 		
 		Button btnApriPizzeria = new Button(shell, SWT.NONE);
+
 		btnApriPizzeria.setBounds(96, 10, 75, 25);
 		btnApriPizzeria.setText("Apri Pizzeria");
 		
