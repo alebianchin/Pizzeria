@@ -15,28 +15,30 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 
-public class interfacciaCliente extends JFrame {
+public class InterfacciaCliente {
 	private Text text;
 	private Text text_1;
-	private String pizza,nome;
-	private ArrayList<String> l;
+	private String nome;
+	private Lista l = new Lista();
+	private Main m;
 	
-	public void setArrayList(ArrayList<String> lo) {
-		this.l = lo;
+	//private ArrayList<Lista> l = new ArrayList();
+	public InterfacciaCliente(Main m){
+		this.m = m;
 	}
 	
 	/**
 	 * Launch the application.
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		try {
-			interfacciaCliente window = new interfacciaCliente();
+			InterfacciaCliente window = new InterfacciaCliente(null);
 			window.open();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 	/**
 	 * Open the window.
@@ -79,9 +81,8 @@ public class interfacciaCliente extends JFrame {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				nome = text.getText();
-				pizza = text_1.getText();
-				l.add(pizza);
-				shell.close();
+				l.aggiungiPizza(nome);
+				m.aggiungi(nome);
 			}
 		});
 		btnConferma.setBounds(73, 227, 89, 25);
@@ -95,6 +96,5 @@ public class interfacciaCliente extends JFrame {
 			}
 		}
 		
-		l = new ArrayList<String>();
 	}
 }

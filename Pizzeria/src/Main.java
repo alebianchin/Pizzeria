@@ -20,10 +20,19 @@ public class Main {
 	 * @param args
 	 */
 	private static int controllo=0;
-	private static ArrayList<String> ordinate;
-	
-	
+	private static Lista lista;
+	public ArrayList<String> listaPizze;
+	public List list_ordinate;
 	public static void main(String[] args) {
+		try {
+			Main window = new Main();
+			window.open();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void open() {
 		
 		/*https://www.websequencediagrams.com/?lz=dGl0bGUgUGl6emVyaWEKCmludGVyZmFjY2lhLT5MaXN0YTpBcHJlIGxpc3RhABAOUGl6emFpb2xvOlRocmVhZCBwAAkIADgOKwBBBgAZBUluAE8FKCkKbm90ZSBsZWZ0IG9mIABjBgBICSBpbiBhdHRlc2EKAH4FLQCBAwggbm90aWZ5QWxsKCkAFAcAfAtyZXR1cm4AgQEGCgCBFQktAIEeDABQBiBwcmVwYXJhABoRAIEfDSBwcm9udGEoAIFSBQBnCACCDQgAdhMtAHoQCgCCQA91dGVudGU6YXJyaXZvIGNsaWVudGUsdACCNwYAFwYAggkOAIMCCzpwcmVtbyBzdQAJDAoKAE0GAIMiCG9yZGluZQCDEwUAgS4IAIJiBXJpZ2gAgl0LIHZlZGUgc2UgYyfDqCB1bgCCAQcsAIJeFQCBVRQAgUIHAIFfBw&s=napkin*/
 		
@@ -31,12 +40,13 @@ public class Main {
 		Shell shell = new Shell();
 		shell.setSize(450, 400);
 		shell.setText("Pizzzzeria Mammma mia");
+		Main m = this;
 		
 		Button btnApriPizzeria = new Button(shell, SWT.NONE);
 		btnApriPizzeria.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				Lista lista = new Lista();
+				lista = new Lista();
 				controllo = 1;
 				Pizzaiolo1 p1= new Pizzaiolo1();
 				Thread thp1 = new Thread(p1);
@@ -57,8 +67,8 @@ public class Main {
 			public void widgetSelected(SelectionEvent e) {
 				//aprire interfaccia cliente
 				if(controllo!=0){
-					interfacciaCliente iu = new interfacciaCliente();
-					iu.setArrayList(ordinate);
+					InterfacciaCliente iu = new InterfacciaCliente(m);
+				//	iu.setArrayList(ordinate);
 					iu.open();
 				}else{
 					JOptionPane.showMessageDialog(null, "La pizzeria non è aperta", "Warning",
@@ -85,8 +95,9 @@ public class Main {
 		lblSecondoPizzaiolo.setText("Secondo Pizzaiolo");
 		
 		
-		List list_ordinate = new List(shell, SWT.BORDER);
+		list_ordinate = new List(shell, SWT.BORDER);
 		list_ordinate.setBounds(10, 95, 90, 80);
+		
 		
 		List list_cottura = new List(shell, SWT.BORDER);
 		list_cottura.setBounds(178, 95, 90, 80);
@@ -116,7 +127,9 @@ public class Main {
 				display.sleep();
 			}
 		}
+	}
 	
-		
+	public void aggiungi(String ciao){
+		list_ordinate.add(ciao);
 	}
 }
