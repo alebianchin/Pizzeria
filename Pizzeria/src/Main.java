@@ -4,6 +4,8 @@ import org.eclipse.swt.widgets.Button;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Label;
@@ -17,6 +19,9 @@ public class Main {
 	 * Launch the application.
 	 * @param args
 	 */
+	private static int controllo=0;
+	private static ArrayList<String> ordinate;
+	
 	
 	public static void main(String[] args) {
 		
@@ -32,7 +37,7 @@ public class Main {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				Lista lista = new Lista();
-				
+				controllo = 1;
 				Pizzaiolo1 p1= new Pizzaiolo1();
 				Thread thp1 = new Thread(p1);
 				Pizzaiolo2 p2= new Pizzaiolo2();
@@ -51,8 +56,15 @@ public class Main {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				//aprire interfaccia cliente
-				interfacciaCliente iu = new interfacciaCliente();
-				iu.open();
+				if(controllo!=0){
+					interfacciaCliente iu = new interfacciaCliente();
+					iu.setArrayList(ordinate);
+					iu.open();
+				}else{
+					JOptionPane.showMessageDialog(null, "La pizzeria non è aperta", "Warning",
+					        JOptionPane.WARNING_MESSAGE);
+				  
+				}
 			}
 		});
 		btnArrivaCliente.setBounds(266, 10, 75, 25);
@@ -73,14 +85,14 @@ public class Main {
 		lblSecondoPizzaiolo.setText("Secondo Pizzaiolo");
 		
 		
-		List list = new List(shell, SWT.BORDER);
-		list.setBounds(10, 95, 90, 80);
+		List list_ordinate = new List(shell, SWT.BORDER);
+		list_ordinate.setBounds(10, 95, 90, 80);
 		
-		List list_1 = new List(shell, SWT.BORDER);
-		list_1.setBounds(178, 95, 90, 80);
+		List list_cottura = new List(shell, SWT.BORDER);
+		list_cottura.setBounds(178, 95, 90, 80);
 		
-		List list_2 = new List(shell, SWT.BORDER);
-		list_2.setBounds(337, 95, 90, 80);
+		List list_pronte = new List(shell, SWT.BORDER);
+		list_pronte.setBounds(337, 95, 90, 80);
 		
 		Label lblPizzeOrdinate = new Label(shell, SWT.NONE);
 		lblPizzeOrdinate.setAlignment(SWT.CENTER);
@@ -104,5 +116,7 @@ public class Main {
 				display.sleep();
 			}
 		}
+	
+		
 	}
 }

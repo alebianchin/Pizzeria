@@ -2,10 +2,13 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.List;
 import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Button;
@@ -13,11 +16,15 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 
 public class interfacciaCliente extends JFrame {
-	public interfacciaCliente() {
-	}
 	private Text text;
 	private Text text_1;
 	private String pizza,nome;
+	private ArrayList<String> l;
+	
+	public void setArrayList(ArrayList<String> lo) {
+		this.l = lo;
+	}
+	
 	/**
 	 * Launch the application.
 	 * @param args
@@ -35,7 +42,7 @@ public class interfacciaCliente extends JFrame {
 	 * Open the window.
 	 */
 	public void open() {
-		Display display = Display.getDefault();
+		Display d = Display.getDefault();
 		Shell shell = new Shell();
 		shell.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		shell.setSize(250, 300);
@@ -73,7 +80,8 @@ public class interfacciaCliente extends JFrame {
 			public void widgetSelected(SelectionEvent e) {
 				nome = text.getText();
 				pizza = text_1.getText();
-				display.close();
+				l.add(pizza);
+				shell.close();
 			}
 		});
 		btnConferma.setBounds(73, 227, 89, 25);
@@ -82,11 +90,11 @@ public class interfacciaCliente extends JFrame {
 		shell.open();
 		shell.layout();
 		while (!shell.isDisposed()) {
-			if (!display.readAndDispatch()) {
-				display.sleep();
+			if (!d.readAndDispatch()) {
+				d.sleep();
 			}
 		}
 		
-		
+		l = new ArrayList<String>();
 	}
 }
