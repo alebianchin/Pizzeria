@@ -19,10 +19,11 @@ public class Main {
 	 * Launch the application.
 	 * @param args
 	 */
-	private static int controllo=0;
-	private static Lista lista;
+	public static int controllo=0;
+	public static Lista lista;
 	public ArrayList<String> listaPizze;
-	public List list_ordinate;
+	public List list_ordinate,list_cottura,list_pronte;
+	
 	public static void main(String[] args) {
 		try {
 			Main window = new Main();
@@ -41,14 +42,14 @@ public class Main {
 		shell.setSize(450, 400);
 		shell.setText("Pizzzzeria Mammma mia");
 		Main m = this;
-		
+		lista  = new Lista(m);
 		Button btnApriPizzeria = new Button(shell, SWT.NONE);
 		btnApriPizzeria.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				lista = new Lista();
+				
 				controllo = 1;
-				Pizzaiolo1 p1= new Pizzaiolo1();
+				Pizzaiolo1 p1= new Pizzaiolo1(lista);
 				Thread thp1 = new Thread(p1);
 				Pizzaiolo2 p2= new Pizzaiolo2();
 				Thread thp2 = new Thread(p2);
@@ -68,7 +69,6 @@ public class Main {
 				//aprire interfaccia cliente
 				if(controllo!=0){
 					InterfacciaCliente iu = new InterfacciaCliente(m);
-				//	iu.setArrayList(ordinate);
 					iu.open();
 				}else{
 					JOptionPane.showMessageDialog(null, "La pizzeria non è aperta", "Warning",
@@ -99,10 +99,10 @@ public class Main {
 		list_ordinate.setBounds(10, 95, 90, 80);
 		
 		
-		List list_cottura = new List(shell, SWT.BORDER);
+		list_cottura = new List(shell, SWT.BORDER);
 		list_cottura.setBounds(178, 95, 90, 80);
 		
-		List list_pronte = new List(shell, SWT.BORDER);
+		list_pronte = new List(shell, SWT.BORDER);
 		list_pronte.setBounds(337, 95, 90, 80);
 		
 		Label lblPizzeOrdinate = new Label(shell, SWT.NONE);
@@ -129,7 +129,7 @@ public class Main {
 		}
 	}
 	
-	public void aggiungi(String ciao){
-		list_ordinate.add(ciao);
+	public void aggiungi(String pizza){
+		list_ordinate.add(pizza);
 	}
 }

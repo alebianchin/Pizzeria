@@ -19,7 +19,7 @@ public class InterfacciaCliente {
 	private Text text;
 	private Text text_1;
 	private String nome;
-	private Lista l = new Lista();
+	private Lista l;
 	private Main m;
 	
 	//private ArrayList<Lista> l = new ArrayList();
@@ -44,6 +44,7 @@ public class InterfacciaCliente {
 	 * Open the window.
 	 */
 	public void open() {
+		l = new Lista(m);
 		Display d = Display.getDefault();
 		Shell shell = new Shell();
 		shell.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
@@ -83,6 +84,7 @@ public class InterfacciaCliente {
 				nome = text.getText();
 				l.aggiungiPizza(nome);
 				m.aggiungi(nome);
+				m.lista.pizzeInLista();
 			}
 		});
 		btnConferma.setBounds(73, 227, 89, 25);
