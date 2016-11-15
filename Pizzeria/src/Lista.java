@@ -14,36 +14,21 @@ public class Lista {
 		System.out.println(listaPizze.size());
 	}
 	public synchronized String getUltima(){
-		System.out.println("allah");
 		while(listaPizze.size()==0){
 			try {
-				System.out.println(listaPizze.size() + " zasdv");
 				wait();
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-			String ultimaPizza = listaPizze.get(listaPizze.size()-1);
+			String ultimaPizza = listaPizze.get(0);
 			System.out.println("ho preso la pizza");
-			listaPizze.remove(listaPizze.size()-1);
+			listaPizze.remove(0);
 			notifyAll();
 			return ultimaPizza;
 		
 	}
-	public synchronized void pizzeInLista(){
-		if(listaPizze.size()==0){
-			System.out.println("non ci sono pizze");
-			try {
-				wait();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}else{
-			System.out.println("ci sono pizze");
-			notifyAll();
-		}
+	
 	}
 
-}

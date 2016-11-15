@@ -86,7 +86,13 @@ public class Main {
 		text.setEditable(false);
 		text.setBounds(178, 41, 90, 21);
 		
+		ProgressBar progressBar1 = new ProgressBar(shell, SWT.NONE);
+		progressBar1.setBounds(10, 235, 170, 17);
+		progressBar1.setMaximum(100);
 		
+		ProgressBar progressBar2 = new ProgressBar(shell, SWT.NONE);
+		progressBar2.setBounds(254, 235, 170, 17);
+		progressBar2.setMaximum(100);
 		
 		Button btnApriPizzeria = new Button(shell, SWT.NONE);
 		btnApriPizzeria.addSelectionListener(new SelectionAdapter() {
@@ -97,9 +103,9 @@ public class Main {
 				playClip();
 				stopClip();
 				controllo = 1;
-				Pizzaiolo1 p1= new Pizzaiolo1(lista,m);
+				Pizzaiolo1 p1= new Pizzaiolo1(lista,m,progressBar1);
 				Thread thp1 = new Thread(p1);
-				Pizzaiolo1 p2= new Pizzaiolo1(lista,m);
+				Pizzaiolo1 p2= new Pizzaiolo1(lista,m,progressBar2);
 				Thread thp2 = new Thread(p2);
 				
 				thp1.start();
@@ -144,15 +150,13 @@ public class Main {
 		btnArrivaCliente.setBounds(349, 10, 75, 25);
 		btnArrivaCliente.setText("Arriva Cliente");
 		
-		ProgressBar progressBar1 = new ProgressBar(shell, SWT.NONE);
-		progressBar1.setBounds(10, 235, 170, 17);
+	
 		
 		Label lblPrimoPizzaiolo = new Label(shell, SWT.NONE);
 		lblPrimoPizzaiolo.setBounds(50, 214, 96, 15);
 		lblPrimoPizzaiolo.setText("Primo Pizzaiolo");
 		
-		ProgressBar progressBar2 = new ProgressBar(shell, SWT.NONE);
-		progressBar2.setBounds(254, 235, 170, 17);
+		
 		
 		Label lblSecondoPizzaiolo = new Label(shell, SWT.NONE);
 		lblSecondoPizzaiolo.setBounds(289, 214, 96, 15);
@@ -208,8 +212,18 @@ public class Main {
 		Display.getDefault().asyncExec(new Runnable(){
 			public void run(){
 				list_cottura.add(pizza);
-				//list_ordinate.remove(list_ordinate.getItemCount());
+				list_ordinate.remove(pizza);
 			}
 		});
 	}
+	
+	public void aggiungi_pronta(String pizza){
+		Display.getDefault().asyncExec(new Runnable(){
+			public void run(){
+				list_pronte.add(pizza);
+				list_cottura.remove(pizza);
+			}
+		});
+	}
+	
 }
