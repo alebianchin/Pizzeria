@@ -80,8 +80,10 @@ public class Main {
 		Display display = Display.getDefault();
 		Shell shell = new Shell();
 		
-		shell.setImage(SWTResourceManager.getImage("..\\Pizzeria\\Pizzeria\\pizzeria.jpg"));
-		Image img = Toolkit.getDefaultToolkit().createImage("..\\Pizzeria\\Pizzeria\\pizzeria.jpg");
+		
+		shell.setImage(SWTResourceManager.getImage("pizzeria.jpg"));
+		
+		shell.setBackgroundImage(SWTResourceManager.getImage("pizzeria.jpg"));
 		
 		shell.setSize(450, 328);
 		shell.setText("Pizzzzeria Mammma mia");
@@ -89,10 +91,12 @@ public class Main {
 		lista  = new Lista(m);
 		
 		text = new Text(shell, SWT.CENTER);
-		text.setForeground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_FOREGROUND));
+		text.setFont(SWTResourceManager.getFont("Segoe UI Black", 14, SWT.BOLD));
+		text.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
+		text.setForeground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		text.setEnabled(false);
 		text.setEditable(false);
-		text.setBounds(178, 41, 90, 21);
+		text.setBounds(129, 41, 197, 27);
 		
 		ProgressBar progressBar1 = new ProgressBar(shell, SWT.NONE);
 		progressBar1.setBounds(10, 235, 170, 17);
@@ -137,6 +141,7 @@ public class Main {
 				btnApriPizzeria.setEnabled(false);
 				btnChiudiPizzeria.setEnabled(true);
 				btnArrivaCliente.setEnabled(true);
+				text.setBackground(SWTResourceManager.getColor(SWT.COLOR_TRANSPARENT));
 				text.setText(" ");
 				playClip();
 				stopClip();
@@ -157,6 +162,7 @@ public class Main {
 		btnChiudiPizzeria.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				text.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 				text.setText("Pizzeria Chiusa");
 				btnApriPizzeria.setEnabled(true);
 				btnArrivaCliente.setEnabled(false);
