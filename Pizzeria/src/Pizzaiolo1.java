@@ -1,12 +1,14 @@
 
 public class Pizzaiolo1 implements Runnable{
 	private Lista lista;
+	private Main main;
 	
-	public Pizzaiolo1(Lista l){
+	public Pizzaiolo1(Lista l, Main m){
 		lista = l;
+		main = m;
 	}
 	
-	public void run() {
+	public synchronized void run() {
 		while(true){
 			
 			try {
@@ -16,7 +18,8 @@ public class Pizzaiolo1 implements Runnable{
 				e.printStackTrace();
 			}
 			System.out.println("mi prendo la pizza");
-			lista.getUltima();
+			//lista.getUltima();
+			main.aggiungi_cottura(lista.getUltima());
 		}
 	}
 	

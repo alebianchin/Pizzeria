@@ -23,9 +23,6 @@ public class InterfacciaCliente {
 	private Main m;
 	
 	//private ArrayList<Lista> l = new ArrayList();
-	public InterfacciaCliente(Main m){
-		this.m = m;
-	}
 	
 	/**
 	 * Launch the application.
@@ -40,11 +37,15 @@ public class InterfacciaCliente {
 		}
 	}*/
 
+	public InterfacciaCliente(Main m2, Lista lista) {
+		this.m = m2;
+		l = lista;
+	}
+
 	/**
 	 * Open the window.
 	 */
 	public void open() {
-		l = new Lista(m);
 		Display d = Display.getDefault();
 		Shell shell = new Shell();
 		shell.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
@@ -83,8 +84,8 @@ public class InterfacciaCliente {
 			public void widgetSelected(SelectionEvent e) {
 				nome = text.getText();
 				l.aggiungiPizza(nome);
-				m.aggiungi(nome);
-				m.lista.pizzeInLista();
+				//m.aggiungi(nome);
+				//m.lista.pizzeInLista();
 			}
 		});
 		btnConferma.setBounds(73, 227, 89, 25);

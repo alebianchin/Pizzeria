@@ -49,9 +49,9 @@ public class Main {
 			public void widgetSelected(SelectionEvent e) {
 				
 				controllo = 1;
-				Pizzaiolo1 p1= new Pizzaiolo1(lista);
+				Pizzaiolo1 p1= new Pizzaiolo1(lista,m);
 				Thread thp1 = new Thread(p1);
-				Pizzaiolo2 p2= new Pizzaiolo2();
+				Pizzaiolo2 p2= new Pizzaiolo2(lista,m);
 				Thread thp2 = new Thread(p2);
 				
 				thp1.start();
@@ -68,7 +68,7 @@ public class Main {
 			public void widgetSelected(SelectionEvent e) {
 				//aprire interfaccia cliente
 				if(controllo!=0){
-					InterfacciaCliente iu = new InterfacciaCliente(m);
+					InterfacciaCliente iu = new InterfacciaCliente(m,lista);
 					iu.open();
 				}else{
 					JOptionPane.showMessageDialog(null, "La pizzeria non è aperta", "Warning",
@@ -130,6 +130,18 @@ public class Main {
 	}
 	
 	public void aggiungi(String pizza){
-		list_ordinate.add(pizza);
+		Display.getDefault().asyncExec(new Runnable(){
+			public void run(){
+				list_ordinate.add(pizza);
+			}
+		});
+	}
+	public void aggiungi_cottura(String pizza){
+		Display.getDefault().asyncExec(new Runnable(){
+			public void run(){
+				list_cottura.add(pizza);
+				//list_ordinate.remove(list_ordinate.getItemCount());
+			}
+		});
 	}
 }
