@@ -22,9 +22,9 @@ public class Lista {
 				e.printStackTrace();
 			}
 		}
-			String ultimaPizza = listaPizze.get(listaPizze.size()-1);
+			String ultimaPizza = listaPizze.get(0);
 			System.out.println("ho preso la pizza");
-			listaPizze.remove(listaPizze.size()-1);
+			listaPizze.remove(0);
 			notifyAll();
 			return ultimaPizza;
 		
