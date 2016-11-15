@@ -2,6 +2,7 @@
 public class Pizzaiolo1 implements Runnable{
 	private Lista lista;
 	private Main main;
+	private String pizza; 
 	
 	public Pizzaiolo1(Lista l, Main m){
 		lista = l;
@@ -17,9 +18,15 @@ public class Pizzaiolo1 implements Runnable{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println("mi prendo la pizza");
-			//lista.getUltima();
-			main.aggiungi_cottura(lista.getUltima());
+			pizza =lista.getUltima();
+			main.aggiungi_cottura(pizza);
+			try {
+				Thread.sleep(15000);
+				main.aggiungi_pronta(pizza);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	

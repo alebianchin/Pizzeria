@@ -51,7 +51,7 @@ public class Main {
 				controllo = 1;
 				Pizzaiolo1 p1= new Pizzaiolo1(lista,m);
 				Thread thp1 = new Thread(p1);
-				Pizzaiolo2 p2= new Pizzaiolo2(lista,m);
+				Pizzaiolo1 p2= new Pizzaiolo1(lista,m);
 				Thread thp2 = new Thread(p2);
 				
 				thp1.start();
@@ -140,8 +140,18 @@ public class Main {
 		Display.getDefault().asyncExec(new Runnable(){
 			public void run(){
 				list_cottura.add(pizza);
-				//list_ordinate.remove(list_ordinate.getItemCount());
+				list_ordinate.remove(pizza);
 			}
 		});
 	}
+	
+	public void aggiungi_pronta(String pizza){
+		Display.getDefault().asyncExec(new Runnable(){
+			public void run(){
+				list_pronte.add(pizza);
+				list_cottura.remove(pizza);
+			}
+		});
+	}
+	
 }
