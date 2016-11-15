@@ -11,7 +11,6 @@ public class Lista {
 		listaPizze.add(pizza);
 		main.aggiungi(pizza);
 		notifyAll();
-		System.out.println(listaPizze.size());
 	}
 	public synchronized String getUltima(){
 		while(listaPizze.size()==0){
@@ -22,12 +21,10 @@ public class Lista {
 				e.printStackTrace();
 			}
 		}
-			String ultimaPizza = listaPizze.get(0);
-			System.out.println("ho preso la pizza");
-			listaPizze.remove(0);
-			notifyAll();
-			return ultimaPizza;
-		
+		String ultimaPizza = listaPizze.get(0);
+		listaPizze.remove(0);
+		notifyAll();
+		return ultimaPizza;
 	}
 	
 	}

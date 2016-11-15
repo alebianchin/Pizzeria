@@ -2,6 +2,8 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Button;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,6 +37,8 @@ public class Main {
 	private static Clip clip;
 	private Text text;
 	Button btnChiudiPizzeria;
+	public Pizzaiolo1 p1;
+	public Pizzaiolo1 p2;
 	public static void main(String[] args) {
 		try {
 			Main window = new Main();
@@ -75,7 +79,11 @@ public class Main {
 		
 		Display display = Display.getDefault();
 		Shell shell = new Shell();
-		shell.setSize(450, 400);
+		
+		shell.setImage(SWTResourceManager.getImage("..\\Pizzeria\\Pizzeria\\pizzeria.jpg"));
+		Image img = Toolkit.getDefaultToolkit().createImage("..\\Pizzeria\\Pizzeria\\pizzeria.jpg");
+		
+		shell.setSize(450, 328);
 		shell.setText("Pizzzzeria Mammma mia");
 		Main m = this;
 		lista  = new Lista(m);
@@ -88,51 +96,21 @@ public class Main {
 		
 		ProgressBar progressBar1 = new ProgressBar(shell, SWT.NONE);
 		progressBar1.setBounds(10, 235, 170, 17);
-		progressBar1.setMaximum(100);
+		progressBar1.setMaximum(95);
 		
 		ProgressBar progressBar2 = new ProgressBar(shell, SWT.NONE);
 		progressBar2.setBounds(254, 235, 170, 17);
-		progressBar2.setMaximum(100);
+		progressBar2.setMaximum(95);
 		
-		Button btnApriPizzeria = new Button(shell, SWT.NONE);
-		btnApriPizzeria.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				btnChiudiPizzeria.setEnabled(true);
-				text.setText(" ");
-				playClip();
-				stopClip();
-				controllo = 1;
-				Pizzaiolo1 p1= new Pizzaiolo1(lista,m,progressBar1);
-				Thread thp1 = new Thread(p1);
-				Pizzaiolo1 p2= new Pizzaiolo1(lista,m,progressBar2);
-				Thread thp2 = new Thread(p2);
-				
-				thp1.start();
-				thp2.start();
-			}
-		});
-
-		btnApriPizzeria.setBounds(10, 10, 75, 25);
-		btnApriPizzeria.setText("Apri Pizzeria");
-		
-		Button btnChiudiPizzeria = new Button(shell, SWT.NONE);
-		btnChiudiPizzeria.setEnabled(false);
-		btnChiudiPizzeria.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				controllo = 0;
-				text.setText("Pizzeria Chiusa");
-				if( controllo == 0 ){
-					
-					
-				}
-			}
-		});
-		btnChiudiPizzeria.setBounds(178, 10, 90, 25);
-		btnChiudiPizzeria.setText("Chiudi Pizzeria");
+		p1= new Pizzaiolo1(lista,m,progressBar1);
+		Thread thp1 = new Thread(p1);
+		thp1.start();
+		p2= new Pizzaiolo1(lista,m,progressBar2);
+		Thread thp2 = new Thread(p2);
+		thp2.start();
 		
 		Button btnArrivaCliente = new Button(shell, SWT.NONE);
+		btnArrivaCliente.setEnabled(false);
 		btnArrivaCliente.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -150,7 +128,46 @@ public class Main {
 		btnArrivaCliente.setBounds(349, 10, 75, 25);
 		btnArrivaCliente.setText("Arriva Cliente");
 		
-	
+		Button btnApriPizzeria = new Button(shell, SWT.NONE);
+		Button btnChiudiPizzeria = new Button(shell, SWT.NONE);
+		
+		btnApriPizzeria.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				btnApriPizzeria.setEnabled(false);
+				btnChiudiPizzeria.setEnabled(true);
+				btnArrivaCliente.setEnabled(true);
+				text.setText(" ");
+				playClip();
+				stopClip();
+				controllo = 1;
+				p1.enable(true);
+				p2.enable(true);
+				synchronized(m){
+					m.notifyAll();
+				}
+				
+			}
+		});
+
+		btnApriPizzeria.setBounds(10, 10, 75, 25);
+		btnApriPizzeria.setText("Apri Pizzeria");
+		
+		btnChiudiPizzeria.setEnabled(false);
+		btnChiudiPizzeria.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				text.setText("Pizzeria Chiusa");
+				btnApriPizzeria.setEnabled(true);
+				btnArrivaCliente.setEnabled(false);
+				btnChiudiPizzeria.setEnabled(false);
+				p1.enable(false);
+				p2.enable(false);
+			}
+		});
+		btnChiudiPizzeria.setBounds(178, 10, 90, 25);
+		btnChiudiPizzeria.setText("Chiudi Pizzeria");
+		
 		
 		Label lblPrimoPizzaiolo = new Label(shell, SWT.NONE);
 		lblPrimoPizzaiolo.setBounds(50, 214, 96, 15);

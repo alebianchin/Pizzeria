@@ -84,6 +84,7 @@ public class InterfacciaCliente {
 			public void widgetSelected(SelectionEvent e) {
 				nome = text.getText();
 				l.aggiungiPizza(nome);
+				shell.close();
 				//m.aggiungi(nome);
 				//m.lista.pizzeInLista();
 			}
